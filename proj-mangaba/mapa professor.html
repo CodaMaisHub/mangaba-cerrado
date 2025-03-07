@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa-Professor</title>
+    <link rel="stylesheet" href="style.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYcYo2jnRvWFG8LJH9oCns3TpKvAAt25E&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    const map = new google.maps.Map(document.getElementById("mapa"), {
+      center: { lat: -15.794, lng: -47.882 }, // Coordenadas do centro do mapa (ex: Brasília)
+      zoom: 10, // Nível de zoom
+    });
+  }
+</script>
+
+</head>
+<body>
+    <!-- 🟢 Cabeçalho -->
+        <header class="header">
+            <div class="logo">M</div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquisar...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="user-info">
+                <span class="points">50<span class="small-m">M</span> Points</span>
+                <i class="fas fa-bell notification-icon"></i>
+                <div class="profile">
+                    <img src="img/perfil.jpg" alt="Foto de Perfil">
+                    <span class="username">Lucas</span>
+                </div>
+            </div>
+        </header>
+
+<div class="container">
+    <!-- 🟥 Barra Lateral -->
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><i class="fas fa-home"></i> Feed</li>
+                <li><i class="fas fa-map-marker-alt"></i> Em alta</li>
+                 <li class="active"><i class="fas fa-fire"></i> Mapa</li>
+            </ul>
+        </nav>
+
+
+  <div class="mapa-container">
+    <div id="mapa">
+      </div>
+  </div>
+
+
+       <div class="posts-container">
+        <div class="post">
+            <img src="img/planta1.jpg" class="post-img">
+            <div class="post-content">
+                <h3>Posso encontrar essa espécie perto da minha cidade?</h3>
+                <p>#BelezasDoCerrado #ExplorandoOCerrado</p>
+                <div class="user-info">
+                    <img src="img/perfil.jpg" class="avatar">
+                    <span>Vitória Cristina Farias</span>
+                    <span class="time">12 min ago</span>
+                </div>
+                <div class="actions">
+                    <span><i class="far fa-star"></i></span>
+                    <span><i class="far fa-heart"></i> 124 Likes</span>
+                    <span><i class="far fa-comment"></i> 37 Comentários</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post">
+            <img src="img/planta3.jpg" class="post-img">
+            <div class="post-content">
+                <h3>Posso encontrar essa espécie perto da minha cidade?</h3>
+                <p>#BelezasDoCerrado #ExplorandoOCerrado</p>
+                <div class="user-info">
+                    <img src="img/perfil.jpg" class="avatar">
+                    <span>Vitória Cristina Farias</span>
+                    <span class="time">12 min ago</span>
+                </div>
+                <div class="actions">
+                    <span><i class="far fa-star"></i></span>
+                    <span><i class="far fa-heart"></i> 124 Likes</span>
+                    <span><i class="far fa-comment"></i> 37 Comentários</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="post">
+            <img src="img/planta3.jpg" class="post-img">
+            <div class="post-content">
+                <h3>Por que essa planta está ameaçada?</h3>
+                <p>#EspéciesAmeaçadas #CerradoVivo</p>
+                <div class="user-info">
+                    <img src="img/perfil.jpg" class="avatar">
+                    <span>Thiago Eduardo Freitas</span>
+                    <span class="time">27 min ago</span>
+                </div>
+                <div class="actions">
+                    <span><i class="far fa-star"></i></span>
+                    <span><i class="far fa-heart"></i> 130 Likes</span>
+                    <span><i class="far fa-comment"></i> 42 Comentários</span>
+                </div>
+            </div>
+        </div>
+     </div>
+     </div>
+
+<div class="container">
+  <div class="card">
+    <div class="headerr">
+      <span>Pins adicionados</span>
+      <span class="dots">&#x22EE;</span>
+    </div>
+    <div class="pin">
+      <div class="circle"></div>
+      <div class="pin-info">
+        <strong>1h</strong>
+        <br>Plantalina
+      </div>
+      <span class="material-icons" style="color: red;">check_circle</span>
+    </div>
+    <div class="pin">
+      <div class="circle"></div>
+      <div class="pin-info">
+        <strong>12h</strong>
+        <br>Parque da cidade
+      </div>
+      <span class="material-icons" style="color: red;">check_circle</span>
+    </div>
+    <div class="pin">
+      <div class="circle"></div>
+      <div class="pin-info">
+        <strong>5d</strong>
+        <br>Sobradinho
+      </div>
+      <span class="material-icons" style="color: gray;">check_circle</span>
+    </div>
+    <div class="pin">
+      <div class="circle"></div>
+      <div class="pin-info">
+        <strong>4d</strong>
+        <br>Itapoa
+      </div>
+      <span class="material-icons" style="color: gray;">check_circle</span>
+    </div>
+    <div class="pin">
+      <div class="circle"></div>
+      <div class="pin-info">
+        <strong>3d</strong>
+        <br>Fazendinha
+      </div>
+      <span class="material-icons" style="color: gray;">check_circle</span>
+    </div>
+    <div class="footer">Confira +</div>
+  </div>
+</div>
+
+</body>
+</html>
