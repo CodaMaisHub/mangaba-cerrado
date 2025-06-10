@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../data/dummy_posts.dart';
 import '../widgets/post_card.dart';
 import 'map_page.dart';
+import 'profile_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     const Center(child: Text('Buscar')),
     const HomeFeed(),
     const MapPage(),
-    const Center(child: Text('Perfil')),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
