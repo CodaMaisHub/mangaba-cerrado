@@ -1,12 +1,10 @@
-// lib/widgets/post_card.dart
-
 import 'package:flutter/material.dart';
 import '../models/post.dart';
 
 class PostCard extends StatefulWidget {
   final Post post;
 
-  const PostCard({super.key, required this.post});
+  const PostCard({Key? key, required this.post}) : super(key: key);
 
   @override
   State<PostCard> createState() => _PostCardState();
@@ -37,42 +35,23 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 5,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header: nome e localização
-          ListTile(
-            leading: const CircleAvatar(
-              backgroundColor: Colors.grey,
-              radius: 20,
-            ),
-            title: Text(post.userName,
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(post.userLocation),
-          ),
-
-          // Imagem
+          // imagem
           ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              post.imageUrl,
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return const Center(child: Text("Imagem não carregada"));
-              },
-            ),
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+            child: Image.network(post.imageUrl, width: double.infinity, height: 200, fit: BoxFit.cover),
           ),
 
-          // Ações (curtidas, comentários, favorito)
           Padding(
             padding: const EdgeInsets.all(12.0),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+<<<<<<< HEAD
                 GestureDetector(
                   onTap: toggleLike,
                   child: Icon(
@@ -93,6 +72,44 @@ class _PostCardState extends State<PostCard> {
                     post.isFavorited ? Icons.star : Icons.star_border,
                     color: Colors.deepPurple,
                   ),
+=======
+                // localização
+                Row(
+                  children: [
+                    const Icon(Icons.location_on, size: 16, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Text(post.location, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+                  ],
+                ),
+                const SizedBox(height: 6),
+
+                // descrição
+                Text(
+                  post.description.length > 255 ? post.description.substring(0, 255) + '...' : post.description,
+                  style: const TextStyle(fontSize: 16),
+                ),
+                const SizedBox(height: 6),
+
+                // hashtags
+                Wrap(
+                  spacing: 6,
+                  children: post.hashtags.map((tag) => Chip(label: Text(tag))).toList(),
+                ),
+
+                const SizedBox(height: 8),
+
+                // curtidas e comentários
+                Row(
+                  children: [
+                    Icon(Icons.favorite, color: Colors.pink[300]),
+                    const SizedBox(width: 4),
+                    Text('${post.likes}'),
+                    const SizedBox(width: 16),
+                    const Icon(Icons.comment, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Text('${post.comments}'),
+                  ],
+>>>>>>> 19e6728b10a41a1dd9c23e3e8b94b83ba495dee8
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:mangaba_app/models/post.dart';
 
 final List<Post> dummyPosts = [
   Post(
+<<<<<<< HEAD
     userName: 'João Pedro',
     userLocation: 'Plano Piloto',
     imageUrl: 'https://picsum.photos/200/300?random=1',
@@ -30,3 +31,24 @@ final List<Post> dummyPosts = [
     hashtags: ['#Cerrado'],
   ),
 ];
+=======
+    id: '1',
+    imageUrl: 'https://source.unsplash.com/600x400/?cerrado,nature',
+    location: 'Chapada dos Veadeiros, GO',
+    hashtags: ['#CerradoVivo', '#FloraNativa'],
+    description: 'Flor do cerrado encontrada durante uma trilha encantadora! 🌺',
+    likes: 128,
+    comments: 12,
+  ),
+  Post(
+    id: '2',
+    imageUrl: 'https://source.unsplash.com/600x400/?cerrado,tree',
+    location: 'Parque Nacional Grande Sertão Veredas, MG',
+    hashtags: ['#Veredas', '#Natureza'],
+    description: 'Árvore típica do cerrado com copa linda e imponente.',
+    likes: 90,
+    comments: 8,
+  ),
+];
+
+>>>>>>> 19e6728b10a41a1dd9c23e3e8b94b83ba495dee8
