@@ -3,10 +3,36 @@
 import 'package:flutter/material.dart';
 import '../models/post.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final Post post;
 
   const PostCard({super.key, required this.post});
+
+  @override
+  State<PostCard> createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  late Post post;
+
+  @override
+  void initState() {
+    super.initState();
+    post = widget.post;
+  }
+
+  void toggleFavorite() {
+    setState(() {
+      post.isFavorited = !post.isFavorited;
+    });
+  }
+
+  void toggleLike() {
+    setState(() {
+      post.isLiked = !post.isLiked;
+      post.likes += post.isLiked ? 1 : -1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +73,13 @@ class PostCard extends StatelessWidget {
             padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
-                const Icon(Icons.thumb_up, color: Colors.red),
+                GestureDetector(
+                  onTap: toggleLike,
+                  child: Icon(
+                    post.isLiked ? Icons.thumb_up : Icons.thumb_up_off_alt,
+                    color: Colors.red,
+                  ),
+                ),
                 const SizedBox(width: 4),
                 Text('${post.likes} Likes'),
                 const SizedBox(width: 16),
@@ -55,9 +87,12 @@ class PostCard extends StatelessWidget {
                 const SizedBox(width: 4),
                 Text('${post.comments} Comentários'),
                 const Spacer(),
-                Icon(
-                  post.isFavorited ? Icons.star : Icons.star_border,
-                  color: Colors.deepPurple,
+                GestureDetector(
+                  onTap: toggleFavorite,
+                  child: Icon(
+                    post.isFavorited ? Icons.star : Icons.star_border,
+                    color: Colors.deepPurple,
+                  ),
                 ),
               ],
             ),

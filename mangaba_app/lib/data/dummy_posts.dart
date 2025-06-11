@@ -1,16 +1,32 @@
-// lib/data/dummy_posts.dart
-import '../models/post.dart';
+import 'package:mangaba_app/models/post.dart';
 
 final List<Post> dummyPosts = [
   Post(
-    userName: 'Usuário 1',
+    userName: 'João Pedro',
     userLocation: 'Plano Piloto',
-    imageUrl: 'https://picsum.photos/seed/0/400/300',
-    likes: 48,
-    comments: 1,
+    imageUrl: 'https://picsum.photos/200/300?random=1',
+    likes: 50,
+    comments: 10,
     isFavorited: true,
-    latitude: -15.793889,
-    longitude: -47.882778,
+    date: DateTime(2025, 6, 10),
+    text: 'Minha primeira postagem no Cerrado!',
+    location: 'Setor norte - Brasília',
+    latitude: -15.77972,
+    longitude: -47.92972,
+    hashtags: ['#Cerrado', '#Flora'],
   ),
-  // outros posts aqui
+  Post(
+    userName: 'Ana Beatriz Oliveira',
+    userLocation: 'Planaltina',
+    imageUrl: 'https://picsum.photos/200/300?random=2',
+    likes: 124,
+    comments: 37,
+    isFavorited: false,
+    date: DateTime(2025, 1, 14),
+    text: 'Alguém sabe o nome?',
+    location: 'Planaltina - Brasília',
+    latitude: -15.6188,
+    longitude: -47.6786,
+    hashtags: ['#Cerrado'],
+  ),
 ];

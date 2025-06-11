@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  camera: ^0.10.0+4  # Ensure this line existsflutter pub get
   cupertino_icons: ^1.0.8
   image_picker: ^1.0.4
   geolocator: ^11.0.0

@@ -1,45 +1,41 @@
-// lib/screens/web_map_widget.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import '../data/dummy_posts.dart';
+import 'package:mangaba_app/data/dummy_posts.dart';
+import 'package:mangaba_app/models/post.dart';
 
 class WebMapWidget extends StatelessWidget {
   const WebMapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return FlutterMap(
-          options: MapOptions(
-            center: LatLng(-15.77972, -47.92972),
-            zoom: 5.5,
-          ),
-          children: [
-            TileLayer(
-              urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: ['a', 'b', 'c'],
-              userAgentPackageName: 'com.example.mangaba_app',
-            ),
-            MarkerLayer(
-              markers: dummyPosts.map((post) {
-                return Marker(
-                  width: 40,
-                  height: 40,
-                  point: LatLng(post.latitude, post.longitude),
-                  child: Tooltip(
-                    message:
-                        '${post.userName}\n📍 ${post.userLocation}\n❤️ ${post.likes}   💬 ${post.comments}',
-                    child: const Icon(Icons.location_on, color: Colors.red),
-                  ),
-                );
-              }).toList(),
-            ),
-          ],
-        );
-      },
+    final markers = dummyPosts.map((post) {
+      final p = post as Post;
+      return Marker(
+        point: LatLng(p.latitude, p.longitude),
+        child: Tooltip(
+          message:
+              '${p.userName}\n📍 ${p.userLocation}\n❤️ ${p.likes}   💬 ${p.comments}',
+          child: Icon(Icons.location_on, color: Colors.red, size: 30),
+        ),
+        width: 30,
+        height: 30,
+        rotate: true,
+      );
+    }).toList();
+
+    return FlutterMap(
+      options: MapOptions(
+        center: const LatLng(-15.77972, -47.92972), // Brasília
+        zoom: 10.0,
+      ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          subdomains: const ['a', 'b', 'c'],
+        ),
+        MarkerLayer(markers: markers),
+      ],
     );
   }
 }
