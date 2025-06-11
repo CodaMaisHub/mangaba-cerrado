@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.grid_view), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.rocket_launch), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
         ],
       ),
