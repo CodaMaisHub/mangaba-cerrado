@@ -11,13 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  image_picker: ^0.8.7+4
-  geolocator: ^9.0.2
+  image_picker: ^1.0.4
+  geolocator: ^11.0.0
   permission_handler: ^10.2.0
-  google_maps_flutter: ^2.5.0
+  google_maps_flutter: ^2.6.0
   flutter_map: ^6.1.0
   latlong2: ^0.9.0
   google_maps_flutter_web: ^0.5.12
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

@@ -6,7 +6,6 @@ import '../widgets/post_card.dart';
 import 'map_page.dart';
 import 'profile_page.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -46,6 +45,13 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
         ],
       ),
+      floatingActionButton: _selectedIndex == 1
+          ? FloatingActionButton(
+              onPressed: () => Navigator.pushNamed(context, '/upload'),
+              backgroundColor: Colors.green,
+              child: const Icon(Icons.add_a_photo),
+            )
+          : null,
     );
   }
 }
