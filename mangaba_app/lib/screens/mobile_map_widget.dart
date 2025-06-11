@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../data/dummy_posts.dart';
+import 'package:mangaba_app/data/dummy_posts.dart';
+import 'package:mangaba_app/models/post.dart';
 
 class MobileMapWidget extends StatelessWidget {
   const MobileMapWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      initialCameraPosition: const CameraPosition(
-        target: LatLng(-15.77972, -47.92972),
-        zoom: 5.5,
+    Set<Marker> markers = dummyPosts.map((Post post) {
+      return Marker(
+        markerId: MarkerId(post.userName!),
+        position: LatLng(post.latitude!, post.longitude!),
+        infoWindow: InfoWindow(title: post.userName!),
+      );
+    }).toSet();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Mapa das Postagens"),
       ),
-      markers: dummyPosts.map((post) {
-        return Marker(
-          markerId: MarkerId(post.userName),
-          position: LatLng(post.latitude, post.longitude),
-          infoWindow: InfoWindow(title: post.userName),
-        );
-      }).toSet(),
+      body: GoogleMap(
+        initialCameraPosition: CameraPosition(
+          target: LatLng(-15.793889, -47.882778), // Brasília como ponto inicial
+          zoom: 10,
+        ),
+        markers: markers,
+      ),
     );
   }
 }
