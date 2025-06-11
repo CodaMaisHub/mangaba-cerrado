@@ -1,22 +1,29 @@
-// lib/models/post.dart
 class Post {
-  final String userName;
-  final String userLocation;
+  final String id;
   final String imageUrl;
+  final String location;
+  final List<String> hashtags;
+  final String description;
+  final double? latitude;     // ADICIONADO
+  final double? longitude;    // ADICIONADO
+  final String? userName;     // ADICIONADO
+  final String? userLocation; // ADICIONADO
   final int likes;
   final int comments;
-  final bool isFavorited;
-  final double latitude;
-  final double longitude;
+  final bool isFavorite;
 
   Post({
-    required this.userName,
-    required this.userLocation,
+    required this.id,
     required this.imageUrl,
-    required this.likes,
-    required this.comments,
-    required this.isFavorited,
-    required this.latitude,
-    required this.longitude,
+    required this.location,
+    required this.hashtags,
+    required this.description,
+    this.latitude,
+    this.longitude,
+    this.userName,
+    this.userLocation,
+    this.likes = 0,
+    this.comments = 0,
+    this.isFavorite = false,
   });
 }
