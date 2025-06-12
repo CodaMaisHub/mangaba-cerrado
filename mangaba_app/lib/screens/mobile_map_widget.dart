@@ -39,7 +39,6 @@ class _MobileMapWidgetState extends State<MobileMapWidget> {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return GoogleMap(
       onMapCreated: _onMapCreated,
       initialCameraPosition: const CameraPosition(
@@ -49,27 +48,6 @@ class _MobileMapWidgetState extends State<MobileMapWidget> {
       markers: markers,
       mapType: MapType.normal,
       zoomControlsEnabled: true,
-=======
-    Set<Marker> markers = dummyPosts.map((Post post) {
-      return Marker(
-        markerId: MarkerId(post.userName!),
-        position: LatLng(post.latitude!, post.longitude!),
-        infoWindow: InfoWindow(title: post.userName!),
-      );
-    }).toSet();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mapa das Postagens"),
-      ),
-      body: GoogleMap(
-        initialCameraPosition: CameraPosition(
-          target: LatLng(-15.793889, -47.882778), // Brasília como ponto inicial
-          zoom: 10,
-        ),
-        markers: markers,
-      ),
->>>>>>> 19e6728b10a41a1dd9c23e3e8b94b83ba495dee8
     );
   }
 }

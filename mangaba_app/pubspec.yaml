@@ -16,10 +16,11 @@ dependencies:
   geolocator: ^11.0.0
   permission_handler: ^10.2.0
   google_maps_flutter: ^2.6.0
-  flutter_map: ^6.2.1
+  flutter_map: ^6.1.0
   latlong2: ^0.9.0
   google_maps_flutter_web: ^0.5.12
   path_provider: ^2.1.2
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:

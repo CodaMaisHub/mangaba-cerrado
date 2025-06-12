@@ -5,8 +5,15 @@ import '../widgets/post_card.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
+  final String currentUser = 'João Pedro'; // Nome do usuário logado (mock)
+
   @override
   Widget build(BuildContext context) {
+    // Filtra os posts apenas do usuário atual
+    final userPosts = dummyPosts
+        .where((post) => post.userName.toLowerCase() == currentUser.toLowerCase())
+        .toList();
+
     return SafeArea(
       child: Column(
         children: [
@@ -25,7 +32,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
-          // Avatar, nome, função e pontos
+          // Avatar, nome, função e pontos (mockado por enquanto)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
@@ -43,8 +50,7 @@ class ProfilePage extends StatelessWidget {
                   children: const [
                     Text(
                       'João Pedro',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Estudante',
@@ -88,18 +94,19 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Lista de postagens com imagem e informações detalhadas
+          // Lista de postagens do usuário
           Expanded(
-            child: ListView.builder(
-              itemCount: dummyPosts.length,
-              itemBuilder: (ctx, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16.0, vertical: 8.0),
-                  child: PostCard(post: dummyPosts[index]),
-                );
-              },
-            ),
+            child: userPosts.isEmpty
+                ? const Center(child: Text('Nenhuma postagem ainda.'))
+                : ListView.builder(
+                    itemCount: userPosts.length,
+                    itemBuilder: (ctx, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        child: PostCard(post: userPosts[index]),
+                      );
+                    },
+                  ),
           ),
         ],
       ),

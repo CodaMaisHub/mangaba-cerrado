@@ -12,107 +12,124 @@ class WebMapWidget extends StatefulWidget {
 }
 
 class _WebMapWidgetState extends State<WebMapWidget> {
-  String selectedUser = 'Todos';
+  String? selectedCategory; // Null for all categories
 
-  List<String> get userNames {
-    final names = dummyPosts.map((post) => post.userName).toSet().toList();
-    names.sort();
-    return ['Todos', ...names];
+  // Define categories and their icons/colors
+  final Map<String, ({IconData icon, Color color})> categoryIcons = {
+    'Flora': (icon: Icons.local_florist, color: Colors.green),
+    'Fauna': (icon: Icons.pets, color: Colors.brown),
+    'Animais': (icon: Icons.pets, color: Colors.orange),
+    'Todos': (icon: Icons.map, color: Colors.blue),
+  };
+
+  // Get unique categories from hashtags
+  List<String> get categories {
+    final allCategories = <String>{'Todos'}; // Start with 'Todos'
+    for (var post in dummyPosts) {
+      for (var hashtag in post.hashtags) {
+        if (hashtag.contains('#Flora')) allCategories.add('Flora');
+        if (hashtag.contains('#Fauna')) allCategories.add('Fauna');
+        if (hashtag.contains('#Animais')) allCategories.add('Animais');
+      }
+    }
+    return allCategories.toList();
   }
 
+  // Filter posts based on selected category
   List<Post> get filteredPosts {
-    if (selectedUser == 'Todos') return dummyPosts;
-    return dummyPosts.where((post) => post.userName == selectedUser).toList();
+    if (selectedCategory == null || selectedCategory == 'Todos') return dummyPosts;
+    return dummyPosts.where((post) {
+      return post.hashtags.any((hashtag) =>
+          hashtag.contains('#$selectedCategory') ||
+          (selectedCategory == 'Animais' && hashtag.contains('#Fauna')));
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    final markers = filteredPosts.map((p) {
-=======
-<<<<<<< HEAD
-    final markers = dummyPosts.map((post) {
-      final p = post as Post;
->>>>>>> 6d9b87e4fe3a5bd1a9701e9b2ebe296ab0126e56
-      return Marker(
-        point: LatLng(p.latitude, p.longitude),
-        width: 30,
-        height: 30,
-        child: Tooltip(
-          message:
-              '${p.userName}\n📍 ${p.userLocation}\n❤️ ${p.likes}   💬 ${p.comments}',
-          child: const Icon(Icons.location_on, color: Colors.red, size: 30),
-        ),
-      );
-    }).toList();
-
     return Column(
       children: [
+        // Row of category icons + labels
         Padding(
           padding: const EdgeInsets.all(12.0),
-          child: DropdownButton<String>(
-            value: selectedUser,
-            items: userNames
-                .map((name) => DropdownMenuItem(value: name, child: Text(name)))
-                .toList(),
-            onChanged: (value) {
-              setState(() {
-                selectedUser = value!;
-              });
-            },
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: categories.map((category) {
+                final iconData = categoryIcons[category]?.icon ?? Icons.error;
+                final color = categoryIcons[category]?.color ?? Colors.grey;
+                final isSelected = selectedCategory == category;
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedCategory = isSelected ? null : category;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      children: [
+                        Icon(
+                          iconData,
+                          size: 30,
+                          color: isSelected ? color.withOpacity(0.7) : color,
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          category,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: isSelected ? color.withOpacity(0.7) : color,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ),
+
+        // Mapa com marcadores filtrados
         Expanded(
           child: FlutterMap(
             options: MapOptions(
-              initialCenter: LatLng(-15.7801, -47.9292), // Brasília
+              initialCenter: const LatLng(-15.7801, -47.9292), // Brasília
               initialZoom: 5,
             ),
             children: [
               TileLayer(
-                urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 subdomains: const ['a', 'b', 'c'],
               ),
               MarkerLayer(
-                markers: markers,
+                markers: filteredPosts.map((p) {
+                  // Determine category and color for the marker
+                  String? markerCategory;
+                  if (p.hashtags.any((h) => h.contains('#Flora'))) markerCategory = 'Flora';
+                  else if (p.hashtags.any((h) => h.contains('#Fauna') || h.contains('#Animais'))) markerCategory = 'Fauna';
+                  else markerCategory = 'Todos';
+                  final color = categoryIcons[markerCategory]?.color ?? Colors.grey;
+
+                  return Marker(
+                    point: LatLng(p.latitude, p.longitude),
+                    width: 30,
+                    height: 30,
+                    child: Tooltip(
+                      message:
+                          '${p.userName}\n📍 ${p.location}\n❤️ ${p.likes}   💬 ${p.comments}',
+                      child: Icon(Icons.location_on, color: color, size: 30),
+                    ),
+                  );
+                }).toList(),
               ),
             ],
           ),
         ),
       ],
-=======
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Mapa das Postagens"),
-      ),
-      body: FlutterMap(
-        options: MapOptions(
-          initialCenter: LatLng(-15.793889, -47.882778), // Brasília
-          initialZoom: 10.0,
-        ),
-        children: [
-          TileLayer(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: const ['a', 'b', 'c'],
-          ),
-          MarkerLayer(
-            markers: dummyPosts.map((Post post) {
-              return Marker(
-                point: LatLng(post.latitude!, post.longitude!),
-                width: 200,
-                height: 80,
-                child: Tooltip(
-                  message:
-                      '${post.userName!}\n📍 ${post.userLocation!}\n❤️ ${post.likes}   💬 ${post.comments}',
-                  child: const Icon(Icons.location_on, color: Colors.red, size: 40),
-                ),
-              );
-            }).toList().cast<Marker>(), // <- força tipo correto
-          ),
-        ],
-      ),
->>>>>>> 19e6728b10a41a1dd9c23e3e8b94b83ba495dee8
     );
   }
 }

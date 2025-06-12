@@ -1,5 +1,3 @@
-// lib/screens/home_page.dart
-
 import 'package:flutter/material.dart';
 import '../data/dummy_posts.dart';
 import '../widgets/post_card.dart';
@@ -46,11 +44,21 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: _selectedIndex == 1
-          ? FloatingActionButton(
-              onPressed: () => Navigator.pushNamed(context, '/upload'),
-              backgroundColor: Colors.green,
-              child: const Icon(Icons.add_a_photo),
-            )
+    ? FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, '/upload'),
+        backgroundColor: Colors.white,
+        elevation: 6,
+        splashColor: Colors.purpleAccent.withOpacity(0.3), // efeito de toque
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(color: Colors.deepPurple, width: 2), // borda roxa
+          borderRadius: BorderRadius.circular(100),
+        ),
+        child: const Icon(
+          Icons.add_a_photo,
+          color: Colors.pinkAccent, // ícone rosa escuro
+          size: 28,
+        ),
+      )
           : null,
     );
   }
@@ -62,11 +70,41 @@ class HomeFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView.builder(
-        itemCount: dummyPosts.length,
-        itemBuilder: (ctx, index) {
-          return PostCard(post: dummyPosts[index]);
-        },
+      child: Column(
+        children: [
+          // Botão de Ranking
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.pushNamed(context, '/ranking');
+              },
+              icon: const Icon(
+                Icons.emoji_events_rounded,
+                color: Colors.amber, // ícone amarelo
+              ),
+              label: const Text('Ver Ranking'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // botão vermelho
+                foregroundColor: Colors.white, // texto branco
+                minimumSize: const Size(double.infinity, 45),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 4,
+              ),
+            ),
+          ),
+          // Lista de postagens
+          Expanded(
+            child: ListView.builder(
+              itemCount: dummyPosts.length,
+              itemBuilder: (ctx, index) {
+                return PostCard(post: dummyPosts[index]);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
