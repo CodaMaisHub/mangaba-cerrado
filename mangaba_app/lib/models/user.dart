@@ -1,7 +1,11 @@
 class User {
+  final String id;
   final String name;
   final String avatarUrl;
-  int score;
 
-  User({required this.name, required this.avatarUrl, this.score = 0});
+  User({
+    required this.id,
+    required this.name,
+    required this.avatarUrl,
+  });
 }

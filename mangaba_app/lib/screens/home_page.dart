@@ -3,6 +3,8 @@ import '../data/dummy_posts.dart';
 import '../widgets/post_card.dart';
 import 'map_page.dart';
 import 'profile_page.dart';
+import 'search_page.dart'; // se ainda não tiver importado
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
 
   final List<Widget> _pages = [
-    const Center(child: Text('Buscar')),
+    const SearchPage(),
     const HomeFeed(),
     const MapPage(),
     const ProfilePage(),
