@@ -17,21 +17,9 @@ class _WebMapWidgetState extends State<WebMapWidget> {
   // Define categories and their icons/colors
   final Map<String, ({IconData icon, Color color})> categoryIcons = {
     'Flora': (icon: Icons.local_florist, color: Colors.green),
-<<<<<<< HEAD
-    'Fauna': (icon: Icons.pets, color: Colors.brown),
-    'Animais': (icon: Icons.pets, color: Colors.orange),
-    'Todos': (icon: Icons.map, color: Colors.blue),
-=======
-<<<<<<< HEAD
     'Fauna': (icon: Icons.pets, color: Colors.brown), // Changed from Icons.paw to Icons.pets
     'Animais': (icon: Icons.pets, color: Colors.orange), // Adjusted to use pets icon
     'Todos': (icon: Icons.map, color: Colors.blue), // Default for all
-=======
-    'Fauna': (icon: Icons.pets, color: Colors.brown),
-    'Animais': (icon: Icons.pets, color: Colors.orange),
-    'Todos': (icon: Icons.map, color: Colors.blue),
->>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
->>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
   };
 
   // Get unique categories from hashtags
@@ -61,12 +49,6 @@ class _WebMapWidgetState extends State<WebMapWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-<<<<<<< HEAD
-        // Row of category icons + labels
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-=======
-<<<<<<< HEAD
         // Row of category icons
         Padding(
           padding: const EdgeInsets.all(12.0),
@@ -86,57 +68,8 @@ class _WebMapWidgetState extends State<WebMapWidget> {
                 selectedIcon: Icon(iconData, color: color.withOpacity(0.7), size: 30),
               );
             }).toList(),
-=======
-        // Row of category icons + labels
-        Padding(
-          padding: const EdgeInsets.all(12.0),
->>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: categories.map((category) {
-                final iconData = categoryIcons[category]?.icon ?? Icons.error;
-                final color = categoryIcons[category]?.color ?? Colors.grey;
-                final isSelected = selectedCategory == category;
-
-                return GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedCategory = isSelected ? null : category;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Column(
-                      children: [
-                        Icon(
-                          iconData,
-                          size: 30,
-                          color: isSelected ? color.withOpacity(0.7) : color,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          category,
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: isSelected ? color.withOpacity(0.7) : color,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-<<<<<<< HEAD
-=======
->>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
->>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
           ),
         ),
-
-        // Mapa com marcadores filtrados
         Expanded(
           child: FlutterMap(
             options: MapOptions(
