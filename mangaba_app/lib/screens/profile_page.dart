@@ -6,6 +6,7 @@ class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   final String currentUser = 'João Pedro'; // Nome do usuário logado (mock)
+<<<<<<< HEAD
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,35 @@ class ProfilePage extends StatelessWidget {
         .where((post) => post.userName.toLowerCase() == currentUser.toLowerCase())
         .toList();
 
+=======
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String _searchQuery = '';
+
+  @override
+  Widget build(BuildContext context) {
+<<<<<<< HEAD
+    // Filtra os posts pelo userName e ordena alfabeticamente
+    final filtered = dummyPosts
+        .where((post) =>
+            post.userName.toLowerCase().contains(_searchQuery.toLowerCase()))
+        .toList();
+
+    filtered.sort(
+        (a, b) => a.userName.toLowerCase().compareTo(b.userName.toLowerCase()));
+
+=======
+    // Filtra os posts apenas do usuário atual
+    final userPosts = dummyPosts
+        .where((post) => post.userName.toLowerCase() == currentUser.toLowerCase())
+        .toList();
+
+>>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
+>>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
     return SafeArea(
       child: Column(
         children: [
@@ -32,7 +62,33 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
 
+<<<<<<< HEAD
           // Avatar, nome, função e pontos (mockado por enquanto)
+=======
+<<<<<<< HEAD
+          // Caixa de busca
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              decoration: const InputDecoration(
+                labelText: 'Buscar por usuário',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Avatar, nome, função e pontos (fixo, pode ajustar se quiser dinamizar)
+=======
+          // Avatar, nome, função e pontos (mockado por enquanto)
+>>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
+>>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
@@ -50,7 +106,16 @@ class ProfilePage extends StatelessWidget {
                   children: const [
                     Text(
                       'João Pedro',
+<<<<<<< HEAD
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+=======
+<<<<<<< HEAD
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+=======
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+>>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
+>>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
                     ),
                     Text(
                       'Estudante',
@@ -94,8 +159,27 @@ class ProfilePage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
+<<<<<<< HEAD
           // Lista de postagens do usuário
           Expanded(
+=======
+<<<<<<< HEAD
+          // Lista de postagens filtradas e ordenadas
+          Expanded(
+            child: ListView.builder(
+              itemCount: filtered.length,
+              itemBuilder: (ctx, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: PostCard(post: filtered[index]),
+                );
+              },
+            ),
+=======
+          // Lista de postagens do usuário
+          Expanded(
+>>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
             child: userPosts.isEmpty
                 ? const Center(child: Text('Nenhuma postagem ainda.'))
                 : ListView.builder(
@@ -107,6 +191,10 @@ class ProfilePage extends StatelessWidget {
                       );
                     },
                   ),
+<<<<<<< HEAD
+=======
+>>>>>>> 53c1804 (Pagina de perfil esclusiva do usuario)
+>>>>>>> ae7df06 (Pagina de perfil esclusiva do usuario)
           ),
         ],
       ),
